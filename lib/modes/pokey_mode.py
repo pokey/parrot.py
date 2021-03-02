@@ -12,20 +12,20 @@ class PokeyMode(BaseMode):
                 'power': 1000
             },
             'throttle': {
-                'postalveolar_click': 0.07
+                'postalveolar_click': 0.15
             }
         },
-        {
-            'name': 'alveolar_click',
-            'sounds': ['Alveolar click'],
-            'threshold': {
-                'probability': 0.99999,
-                'power': 1000
-            },
-            'throttle': {
-                'alveolar_click': 0.07
-            }
-        }
+        # {
+        #     'name': 'alveolar_click',
+        #     'sounds': ['Alveolar click'],
+        #     'threshold': {
+        #         'probability': 0.999999,
+        #         'power': 1000
+        #     },
+        #     'throttle': {
+        #         'alveolar_click': 0.07
+        #     }
+        # }
     ]
     
     def start(self): 
