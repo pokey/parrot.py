@@ -1,46 +1,47 @@
-from subprocess import PIPE, Popen
-from config.config import *
-from lib.modes.base_mode import *
+from lib.modes.base_talon_mode import BaseTalonMode
 
-class PokeyMode(BaseMode):
+class PokeyMode(BaseTalonMode):
     patterns = [
         {
             'name': 'postalveolar_click',
             'sounds': ['Postalveolar click'],
             'threshold': {
-                'percentage': 99.7,
-                'power': 1000
+                'probability': 0.99999,
+                'power': 10000
             },
             'throttle': {
                 'postalveolar_click': 0.15
             }
         },
-        # {
-        #     'name': 'alveolar_click',
-        #     'sounds': ['Alveolar click'],
-        #     'threshold': {
-        #         'probability': 0.999999,
-        #         'power': 1000
-        #     },
-        #     'throttle': {
-        #         'alveolar_click': 0.07
-        #     }
-        # }
+        {
+            'name': 'alveolar_click',
+            'sounds': ['Alveolar click'],
+            'threshold': {
+                'probability': 0.99999,
+                'power': 10000,
+            },
+            'throttle': {
+                'alveolar_click': 0.07
+            },
+            
+            # TODO: This doesn't do anything yet. Implement this by storing a
+            # list of sounds that are in "limbo" waiting for their
+            # ensureNotFollowedBy sound
+            'ensureNotFollowedBy': {
+                'suppress_clicks': 0.08
+            }
+        },
+        {
+            'name': 'suppress_clicks',
+            'sounds': ['Speech'],
+            'threshold': {
+                'probability': 0.9999,
+                'power': 10000,
+            },
+            'throttle': {
+                'alveolar_click': 0.1,
+                'postalveolar_click': 0.1,
+            },
+            "sendToTalon": False
+        },
     ]
-    
-    def start(self): 
-        self.talon_subprocess = Popen("/Users/pokey/.talon/bin/repl", stdin=PIPE)
-        self.talon_subprocess.stdin.write(
-            "from talon import actions\n".encode("utf-8")
-        )
-        self.talon_subprocess.stdin.flush()
-        super().start()
-
-    def handle_sounds( self, dataDicts ):
-        for pattern in self.patterns:
-            if( self.detect(pattern["name"]) ):
-                self.talon_subprocess.stdin.write(
-                    f"actions.user.{pattern['name']}()\n".encode("utf-8")
-                )
-                self.talon_subprocess.stdin.flush()
-                break

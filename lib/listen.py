@@ -179,7 +179,7 @@ def classification_consumer( audio, stream, classifier, persist_files, high_spee
             prediction_time = time.time() - starttime - seconds_playing
             
             #long_comment = "Time: %0.2f - Prediction in: %0.2f - Winner: %s - Percentage: %0d - Frequency %0d                                        " % (seconds_playing, prediction_time, winner, probabilityDict[winner]['percent'], probabilityDict[winner]['frequency'])
-            short_comment = "T %0.3f - [%0.3f%s %s] F:%0d P:%0d" % (seconds_playing, probabilityDict[winner]['probability'], '', winner, frequency, probabilityDict[winner]['power'])            
+            short_comment = "T %0.3f - [%0.6f%s %s] F:%0d P:%0d" % (seconds_playing, probabilityDict[winner]['probability'], '', winner, frequency, probabilityDict[winner]['power'])            
             if( winner != "silence" ):
                 print( short_comment )
             
@@ -338,7 +338,6 @@ def create_empty_probability_dict( classifier, data, frequency, intensity, power
 def create_probability_dict( classifier, data, frequency, intensity, power ):
     # Predict the outcome of the audio file    
     probabilities = classifier.predict_proba( data )
-    print(probabilities)
     percentages = probabilities * 100
     percentages = percentages.astype(int)
 
