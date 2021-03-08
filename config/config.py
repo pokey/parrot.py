@@ -39,7 +39,7 @@ CONVERSION_OUTPUT_FOLDER = "data/output"
 PATH_TO_FFMPEG = "ffmpeg/bin/ffmpeg"
 
 #DEFAULT_CLF_FILE = "tiny_gold_league_trio"
-DEFAULT_CLF_FILE = "model-2021-03-05-combined"
+DEFAULT_CLF_FILE = "single-model-ensemble"
 STARTING_MODE = "pokey_mode"
 
 SAVE_REPLAY_DURING_PLAY = True

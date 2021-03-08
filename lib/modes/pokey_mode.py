@@ -17,8 +17,8 @@ class PokeyMode(BaseTalonMode):
             'name': 'alveolar_click',
             'sounds': ['Alveolar click'],
             'threshold': {
-                'probability': 0.99999,
-                'power': 10000,
+                'probability': 0.9999,
+                'power': 12500,
             },
             'throttle': {
                 'alveolar_click': 0.07

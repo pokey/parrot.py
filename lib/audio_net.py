@@ -1,3 +1,4 @@
+from numpy.random import default_rng
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -79,6 +80,7 @@ class AudioNetTrainer:
     dataset = False
     train_indecis = []
     input_size = 120
+    data_seed = 42
     
     def __init__(self, dataset, net_count = 1):
         self.net_count = net_count
@@ -95,9 +97,11 @@ class AudioNetTrainer:
         # Split the dataset into validation and training data loaders
         indices = list(range(self.dataset_size))
         split = int(np.floor(self.validation_split * self.dataset_size))
-        np.random.seed(self.random_seed)
-        np.random.shuffle(indices)
+        rng = default_rng(self.data_seed)
+        rng.shuffle(indices)
         train_indices, val_indices = indices[split:], indices[:split]
+
+        np.random.seed(self.random_seed)
         
         # Append augmentations to the training indexes and recalculate the actual validation split
         self.train_indecis = dataset.append_augmentation_ids( train_indices, 0.5 )
