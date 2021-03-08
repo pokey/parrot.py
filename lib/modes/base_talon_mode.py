@@ -9,7 +9,7 @@ class BaseTalonMode(BaseMode, metaclass=ABCMeta):
             
     def start(self): 
         talon_repl_path = expanduser("~/.talon/bin/repl")
-        self.talon_subprocess = Popen(talon_repl_path, stdin=PIPE)
+        self.talon_subprocess = Popen([talon_repl_path, "-wr"], stdin=PIPE)
         self.talon_subprocess.stdin.write(
             "from talon import actions\n".encode("utf-8")
         )
