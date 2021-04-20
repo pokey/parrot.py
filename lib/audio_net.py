@@ -73,7 +73,7 @@ class AudioNetTrainer:
     criterion = nn.NLLLoss()
     batch_size = 256
     validation_split = .2
-    max_epochs = 300
+    max_epochs = 10
     random_seed = 42
     use_cuda = torch.cuda.is_available()
     device = torch.device("cuda" if use_cuda else "cpu")

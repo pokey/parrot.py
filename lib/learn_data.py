@@ -81,11 +81,12 @@ def learn_data():
         print( "--------------------------" )        
         dataset_labels = determine_labels( dir_path )
         print( "--------------------------" )
-        dataset = AudioDataset(DATASET_FOLDER, dataset_labels, settings)
-        trainer = AudioNetTrainer(dataset, net_count)
-        
-        print( "Learning the data..." )
-        trainer.train( clf_filename )
+        for i in range(25):
+            dataset = AudioDataset(DATASET_FOLDER, dataset_labels, settings)
+            trainer = AudioNetTrainer(dataset, net_count)
+            
+            print( f"{i}. Learning the data..." )
+            trainer.train( clf_filename )
 
 def fit_sklearn_classifier( classifier,  dir_path, clf_filename, settings ):
     max_files_per_category = input("How many files should we analyze per category? ( empty is all )" )

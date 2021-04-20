@@ -14,14 +14,14 @@ class PokeyMode(BaseTalonMode):
             }
         },
         {
-            'name': 'alveolar_click',
-            'sounds': ['Alveolar click'],
+            'name': 'dental_click',
+            'sounds': ['Dental click'],
             'threshold': {
-                'probability': 0.9999,
-                'power': 12500,
+                'probability': 0.99999,
+                'power': 8000,
             },
             'throttle': {
-                'alveolar_click': 0.07
+                'dental_click': 0.07
             },
             
             # TODO: This doesn't do anything yet. Implement this by storing a
@@ -35,11 +35,11 @@ class PokeyMode(BaseTalonMode):
             'name': 'suppress_clicks',
             'sounds': ['Speech'],
             'threshold': {
-                'probability': 0.9999,
+                'probability': 0.999,
                 'power': 10000,
             },
             'throttle': {
-                'alveolar_click': 0.1,
+                'dental_click': 0.1,
                 'postalveolar_click': 0.1,
             },
             "sendToTalon": False
